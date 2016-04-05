@@ -12,4 +12,4 @@ Further Cut / Shuffle events are simplified by clicking the Swap Text button whi
 
 Try experimenting with different modes and see what comes out!
 
-If you run into any problems or have any questions, please contact me @ erikj.waters@gmail.com or facebook, thanks!
+If you run into any problems or have any questions, please contact me: erikj.waters@gmail.com or facebook, thanks!
