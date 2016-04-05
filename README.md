@@ -1,6 +1,6 @@
 https://en.wikipedia.org/wiki/Cut-up_technique
 
-CUT is an auto cut up web app with has three modes (currently):
+CUT is an auto cut up web app with three modes (currently):
 
  Bowie: Which sorts the input text into groups of 4 - 6 elements (separated by a space " "), then shuffles and returns
  
