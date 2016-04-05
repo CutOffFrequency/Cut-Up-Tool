@@ -1,0 +1,14 @@
+  #output {
+	display: block;
+} #mode {
+	font-weight: bold;
+} #status > h4 {
+	display: inline-block;
+	margin-right: 10px;
+} h1 {
+	display: inline-block;
+	margin-bottom: 0;
+	padding-bottom: 0;
+} div {
+	padding-bottom: 20px;
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+<head>
+  
+  <title>CUT</title>
+  <meta name="Application" content="Auto Cut-Up Tool">
+  <meta name="Author" content="Erik Waters">
+  <meta name="Contact" content="erikj.waters@gmail.com">
+
+  <link rel="stylesheet" href="decoupage.css">
+  <script src="decoupage.js" defer></script>
+
+</head>
+
+<body background="background.png">
+
+  <div class="header">
+  <h1>Cut Up Technique</h1>
+  <span id="version">Alpha v0.1</span>
+  </div>
+
+  <div id="options">
+  <span id="mode">Select Mode:</span>
+  <span id="span-cb1-label">Bowie</span>
+  <input type="checkbox" id="bowie"></input>
+  <span id="span-cb2-label">Yorke</span>
+  <input type="checkbox" id="yorke"></input>
+  <span id="span-cb3-label">Random</span>
+  <input type="checkbox" id="random" checked="true"></input>
+  </div>
+
+  <div id="input">
+  <textarea id="text_input" rows="12" cols="50" placeholder="Paste text here & press Enter to cut-up&#10&#10Try experimenting with different text lengths&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random "></textarea>  
+  </div>
+
+  <div id="output">
+  <textarea id="text_output" rows="12" cols="50" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using ctrl+a to select the text and then copy / paste into a text editor&#10&#10I might add scroll bars later, no promises"></textarea>  
+  </div>
+
+  <div id="status">
+  <h4 class="status">Status:</h4>
+  <h4 class="status" id="status_readout">Ready</h4>
+  </div>
+
+  <h5>Auto Cut-up Tool by Erik Waters, contact at: ErikJ.Waters@gmail.com</h5>
+
+</body>
+</html>
