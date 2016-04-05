@@ -10,10 +10,11 @@ var inputText,
     input = document.getElementById("input"),
     output = document.getElementById("output"),
     options = document.getElementById("options"),
-    readout = document.getElementById("status_readout");
+    readout = document.getElementById("status_readout"),
+    cutit = document.getElementById("cutit"),
+    cutitagain = document.getElementById("cutitagain");
 // displays status of shuffle, if check fails pass option
 function checkOk(status) {
-	console.log("checking",status);
 	switch (status) {
     case "start":
         readout.textContent = "Sorting - Please Wait";
@@ -37,12 +38,9 @@ function checkOk(status) {
 // this is the whole point of this thing
 function shuffle(array) {
     var m = array.length, t, i, shuffledString;
-    // While there remain elements to shuffle…
-    while (m) {
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-        // And swap it with the current element.
-        t = array[m];
+    while (m) { // While there remain elements to shuffle…
+        i = Math.floor(Math.random() * m--); // Pick a remaining element…
+        t = array[m]; // And swap it with the current element.
         array[m] = array[i];
         array[i] = t;
     }
@@ -56,12 +54,12 @@ function testInput(textArray, targetLength) {
 		console.log("test ok");
 		return check = "ok";
 	} else {
+        console.log("test fail");
 		return check = "fail";
-		console.log("test fail");
 	}
 }
 function checkArray(text, option) {
-	var fail, splitText; 
+	var fail, splitText;
 	console.log("getting reaady to check",option, splitText);
 	switch (option) {
 	case "bowie":
@@ -74,61 +72,55 @@ function checkArray(text, option) {
 	break;
 	case "random":
 	    splitText = text.split(" ");
-	    console.log("switch syntax ok");
 	    check = testInput(splitText, 4);
 	break;
-	default: 
+	default:
 	    console.log("you broke it");
 	break;
 	}
-	console.log(check,"is what it really is tho");
     if (check === "ok") {
-    	console.log("check ok!!");
+    	console.log("check ok!");
 		checkOk("start");
         cutup(splitText, option);
 		checkOk("end");
 	} else {
-		console.log("check fail!!");
+		console.log("check fail!");
 		checkOk(option);
 	}
 }
 // delim by space and shuffle
 function randomize(text) {
 	var shuffledArray;
-	console.log("sorting",option);
+	// console.log("sorting",option);
 	shuffledArray = shuffle(text);
 	text_output.value = shuffledArray.join(" ");
 }
 // sort into an array q by groups of 4 - 6 elements
 function sortBowie(text) {
     var m, q, r, s, q = [], t = text.length;
-    // while there are enough elements in the array to grab up to 6 elements
-    while (t > 5) {
-        // determine the number of elements to move; 4 - 6 
-    	m = Math.floor(Math.random() * (5 - 3 + 1)) + 3;
-    	// select the appropriate elements, stringify & move to q
-        r = text.splice(0, m);
+    while (t > 5) { // while there are enough elements in the array to grab up to 6 elements
+    	m = Math.floor(Math.random() * (5 - 3 + 1)) + 3; // determine the number of elements to move; 4 - 6 
+        r = text.splice(0, m); // select the appropriate elements, stringify & move to q
         s = r.join(" ");
         q.push(s);
-        // decrement by m
-        t -= m;
+        t -= m; // decrement by m
     }
-    // if there's anything left: stringify and push to q
+    // if there's anything left: stringify and push to q, same process as above
     if (t) {
         r = text.splice(0, m);
         s = r.join(" ");
-        q.push(s);    	
+        q.push(s);
     }
     randomize(q);
 }
 // invokes the proper sort function
 function cutup (text, option) {
-	console.log("cut up", option)
+	// console.log("cut up", option)
     if (option === "bowie") sortBowie(text);
     if (option === "yorke") randomize(text);
     if (option === "random") randomize(text);
 }
-// prevents more than one checkbox from being checked, updateds option value
+// prevents more than one checkbox from being checked, updates option value
 function setMode (mode){
     bowie.checked = mode === bowie ? true : false;
     yorke.checked = mode === yorke ? true : false;
@@ -143,21 +135,27 @@ options.addEventListener("click", function (e) {
 		setMode(e.target);
 	}
 })
-// input event handler
-text_input.onkeyup = function (e) {
-	if (event.which === 13) {
-		inputText = text_input.value;
-		console.log(option,"should run");
-		switch (option) {
-		case "bowie":
-		    checkArray(inputText, option);
-		break;
-		case "yorke":
-		    checkArray(inputText, option);
-        break;
-        case "random":
-            checkArray(inputText, option);
-        break;
-		}
+// shuffle event handler
+cutit.onclick = function (e) {
+	inputText = text_input.value;
+	// console.log(option,"should run");
+	switch (option) {
+	case "bowie":
+	    checkArray(inputText, option);
+	break;
+	case "yorke":
+	    checkArray(inputText, option);
+       break;
+       case "random":
+           checkArray(inputText, option);
+       break;
+	}
+}
+// swap event handler
+cutitagain.onclick = function (e) {
+    if (text_output.value) {
+        text_input.value = text_output.value;
+        text_output.value = "";
+        readout.textContent = "Moved Output to Input Field - Ready"
     }
 }
