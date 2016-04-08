@@ -1,4 +1,12 @@
-**CUT** is an auto [Cut-up](https://en.wikipedia.org/wiki/Cut-up_technique) web application with three modes (currently):
+**CUT** is an auto [Cut-up](https://en.wikipedia.org/wiki/Cut-up_technique) web application 
+
+Why use the cut-up technique? 
+
+Various authors, lyricists and poets have used this technique to gain insight or a new perspective on a situation or the source material itself. I would not suggest going "Naked Lunch" and using this technique to do the arranging, but I've found it an intriguing way to find ideas or inspiration.
+
+I recommend using anything you can get your hands on ... news clippings, journal entries, a dream diary, unfinished poetry, a paragraph from a novel you like, lyrics or poetry that have some significance to you or anything that evoke a feeling that you wish to explore or capture.
+
+**CUT** has the following modes:
 
 * **Bowie**: Which sorts the input text into groups of 4 - 6 elements (separated by a space " "), then shuffles and returns
  
