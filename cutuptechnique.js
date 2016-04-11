@@ -54,9 +54,8 @@ function shuffle(array) {
 }
 // check to see an appropriate amount of elements exist by option
 function testInput(textArray, targetLength) {
-    var arrayLength = textArray.length;
     console.log("testing", textArray, arrayLength);
-    if (arrayLength > targetLength) {
+if (textArray.length > targetLength) {
         console.log("test ok");
         return check = "ok";
     } else {
@@ -73,7 +72,7 @@ function checkArray(text, option) {
             check = testInput(splitText, 12);
             break;
         case "yorke":
-            splitText = text.split(", ");
+            splitText = text.split(", "); // ", " to prevent insertion of extra spaces when ranomize is invoked
             check = testInput(splitText, 3);
             break;
         case "random":
@@ -97,7 +96,6 @@ function checkArray(text, option) {
 // delim by space and shuffle
 function randomize(text) {
     var shuffledArray;
-    // console.log("sorting",option);
     shuffledArray = shuffle(text);
     text_output.value = shuffledArray.join(" ");
 }
@@ -109,23 +107,21 @@ function sortBowie(text) {
         s,
         q = [],
         t = text.length;
-    while (t > 5) {
-        // while there are enough elements in the array to grab up to 6 elements
+    while (t > 5) { // while there are enough elements in the array to grab up to 6 elements
         m = Math.floor(Math.random() * (5 - 3 + 1)) + 3; // determine the number of elements to move; 4 - 6
         r = text.splice(0, m); // select the appropriate elements, stringify & move to q
         s = r.join(" ");
         q.push(s);
         t -= m; // decrement by m
     }
-    // if there's anything left: stringify and push to q, same process as above
-    if (t) {
+    if (t) { // if there's anything left: stringify and push to q, same process as above
         r = text.splice(0, m);
         s = r.join(" ");
         q.push(s);
     }
     randomize(q);
 }
-// invokes the proper sort function
+// invoke sort for bowie else randomize
 function cutup(text, option) {
     // console.log("cut up", option)
     if (option === "bowie") sortBowie(text);
@@ -150,7 +146,6 @@ options.addEventListener("click", function (e) {
 // shuffle event handler
 cutit.onclick = function (e) {
     inputText = text_input.value;
-    // console.log(option,"should run");
     switch (option) {
         case "bowie":
             checkArray(inputText, option);
