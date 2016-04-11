@@ -54,7 +54,7 @@ function shuffle(array) {
 }
 // check to see an appropriate amount of elements exist by option
 function testInput(textArray, targetLength) {
-    console.log("testing", textArray, arrayLength);
+    console.log("testing", textArray, textArray.length);
 if (textArray.length > targetLength) {
         console.log("test ok");
         return check = "ok";
