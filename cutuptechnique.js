@@ -73,7 +73,7 @@ function checkArray(text, option) {
             check = testInput(splitText, 12);
             break;
         case "yorke":
-            splitText = text.split(",");
+            splitText = text.split(", ");
             check = testInput(splitText, 3);
             break;
         case "random":
