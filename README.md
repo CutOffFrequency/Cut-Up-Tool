@@ -3,6 +3,7 @@
 **Why use the cut-up technique?**
 
 Various authors, lyricists and poets have used this technique to gain insight or new perspectives on a situation or source material. I would not suggest going "Naked Lunch" and using this technique to arrange a work, but instead as a method of finding ideas or inspiration
+
 I recommend using anything you can get your hands on ... news clippings, journal entries, a dream diary, unfinished poetry, a paragraph from a novel you like, lyrics or poetry that have some significance to you or anything that evokes a feeling or idea that you wish to explore
 
 **CUT** has the following modes:
