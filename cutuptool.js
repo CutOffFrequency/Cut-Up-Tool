@@ -6,37 +6,38 @@ $(function(){
         inputDelim,
         check,
         option = "random",
-        text_input = document.getElementById("text_input"),
-        text_output = document.getElementById("text_output"),
-        bowie = document.getElementById("bowie"),
-        yorke = document.getElementById("yorke"),
-        random = document.getElementById("random"),
-        input = document.getElementById("input"),
-        output = document.getElementById("output"),
-        options = document.getElementById("options"),
-        readout = document.getElementById("status_readout"),
-        cutit = document.getElementById("cutit"),
-        cutitagain = document.getElementById("cutitagain");
+        text_input = $('#text_input'),
+        text_output = $('#text_output'),
+        bowie = $('#bowie'),
+        yorke = $('#yorke'),
+        random = $('#random'),
+        input = $('#input'),
+        output = $('#output'),
+        options = $('#options'),
+        readout = $('#status_readout'),
+        cutit = $('#cutit'),
+        cutitagain = $('#cutitagain'),
+        clear = $('#clear');
     // displays status of shuffle, if check fails pass option
     function checkOk(status) {
         switch (status) {
             case "start":
-                readout.textContent = "Sorting - Please Wait";
+                readout.text("Sorting - Please Wait");
                 break;
             case "end":
-                readout.textContent = "Finished - Ready";
+                readout.text("Finished - Ready");
                 break;
             case "bowie":
-                readout.textContent = "Failed check, please try again with more text";
+                readout.text("Failed check, please try again with more text");
                 break;
             case "yorke":
-                readout.textContent = "Failed check, please try again with more text separated by commas";
+                readout.text("Failed check, please try again with more text separated by commas");
                 break;
             case "random":
-                readout.textContent = "Failed check, please try again with more text";
+                readout.text("Failed check, please try again with more text");
                 break;
             default:
-                readout.textContent = "Something is wrong";
+                readout.text("Something is wrong");
         }
     }
     // this is the whole point of this thing
@@ -99,7 +100,7 @@ $(function(){
     function randomize(text) {
         var shuffledArray;
         shuffledArray = shuffle(text);
-        text_output.value = shuffledArray.join(" ");
+        text_output.val(shuffledArray.join(" "));
     }
     // sort into an array q by groups of 4 - 6 elements
     function sortBowie(text) {
@@ -130,24 +131,16 @@ $(function(){
         if (option === "yorke") randomize(text);
         if (option === "random") randomize(text);
     }
-    // prevents more than one checkbox from being checked, updates option value
-    function setMode(mode) {
-        bowie.checked = mode === bowie ? true : false;
-        yorke.checked = mode === yorke ? true : false;
-        random.checked = mode === random ? true : false;
-        if (mode === bowie) option = "bowie";
-        if (mode === yorke) option = "yorke";
-        if (mode === random) option = "random";
-    }
-    // checkbox event listener
-    options.addEventListener("click", function (e) {
-        if (e.target === bowie || e.target === yorke || e.target === random) {
-            setMode(e.target);
+    // radio event listener
+    options.click(function (e) {
+        if (e.target.type === "radio") {
+            option = e.target.id;
+            readout.text("Mode changed to: " + option + " - Ready");
         }
     });
     // shuffle event handler
-    cutit.onclick = function (e) {
-        inputText = text_input.value;
+    cutit.click(function (e) {
+        inputText = text_input.val();
         switch (option) {
             case "bowie":
                 checkArray(inputText, option);
@@ -159,13 +152,19 @@ $(function(){
                 checkArray(inputText, option);
                 break;
         }
-    };
+    });
     // swap event handler
-    cutitagain.onclick = function (e) {
-        if (text_output.value) {
-            text_input.value = text_output.value;
-            text_output.value = "";
-            readout.textContent = "Moved Output to Input Field - Ready";
+    cutitagain.click(function (e) {
+        var blip, outValue = text_output.val();
+        if (outValue) {
+            text_input.val(outValue);
+            text_output.val('');
+            readout.text("Moved Output to Input Field - Ready");
         }
-    };
+    });
+    clear.click(function (e) {
+        text_output.val('');
+        text_input.val('');
+        readout.text("Text cleared, mode: " + option + " - Ready");
+    });
 });
