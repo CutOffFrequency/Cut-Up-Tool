@@ -1,53 +1,54 @@
 <!doctype html>
 
 <html>
-<head>
+  <head>
+    
+    <title>CUT</title>
+    <meta name="Application" content="Auto Cut-Up Tool">
+    <meta name="Author" content="Erik Waters">
+    <meta name="Contact" content="erikj.waters@gmail.com">
   
-  <title>CUT</title>
-  <meta name="Application" content="Auto Cut-Up Tool">
-  <meta name="Author" content="Erik Waters">
-  <meta name="Contact" content="erikj.waters@gmail.com">
+    <link rel="stylesheet" href="cutuptool.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="cutuptool.css">
-  <script src="cutuptool.js" defer></script>
+    <script src="cutuptool.js" defer></script>.
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
 
-</head>
-
-<body background="background.png">
-
-  <div class="header">
-  <h1>Cut Up Technique</h1>
-  <span id="version">Alpha v0.1</span>
-  </div>
-
-  <div id="options">
-  <span id="mode">Select Mode:</span>
-  <span id="span-cb1-label">Bowie</span>
-  <input type="checkbox" id="bowie"></input>
-  <span id="span-cb2-label">Yorke</span>
-  <input type="checkbox" id="yorke"></input>
-  <span id="span-cb3-label">Random</span>
-  <input type="checkbox" id="random" checked="true"></input>
-  <div>
-  <button type="button" id="cutit">Cut & Shuffle</button>
-  <button type="button" id="cutitagain">Swap Text</button>
-  </div>
-  </div>
-
-  <div id="input">
-  <textarea id="text_input" rows="12" cols="50" placeholder="Paste text here & click Cut & Shuffle to cut-up&#10&#10Click Swap Text to submit previous output for more shuffling&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random "></textarea>
-  </div>
-
-  <div id="output">
-  <textarea id="text_output" rows="12" cols="50" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using Ctrl+a to select the text and then copy / paste into a text editor"></textarea>
-  </div>
-
-  <div id="status">
-  <h4 class="status">Status:</h4>
-  <h4 class="status" id="status_readout">Ready</h4>
-  </div>
-
-  <h8>Auto Cut-up Tool by Erik Waters, contact at: ErikJ.Waters@gmail.com</h8>
-
-</body>
+  </head>
+  
+    <div class="header">
+      <h1>Cut-Up Tool</h1>
+      <span id="version">Alpha v0.1</span>
+    </div>
+  
+    <div id="options">
+        <span id="mode">Select Mode:</span>
+        <span>Bowie</span>
+        <input type="radio" name="mode" id="bowie"></input>
+        <span>Yorke</span>
+        <input type="radio" name="mode" id="yorke"></input>
+        <span>Random</span>
+        <input type="radio" name="mode" id="random" checked="true"></input>
+      <div>
+        <button type="button" id="cutit">Cut & Shuffle</button>
+        <button type="button" id="cutitagain">Swap Text</button>
+      </div>
+    </div>
+  
+    <div id="input">
+      <textarea id="text_input" rows="12" cols="50" placeholder="Paste text here & click Cut & Shuffle to cut-up&#10&#10Click Swap Text to submit previous output for more shuffling&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random "></textarea>
+    </div>
+  
+    <div id="output">
+      <textarea id="text_output" rows="12" cols="50" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using Ctrl+a to select the text and then copy / paste into a text editor"></textarea>
+    </div>
+  
+    <div id="status">
+      <h4 class="status">Status:</h4>
+      <h4 class="status" id="status_readout">Ready</h4>
+    </div>
+  
+    <h8>Auto Cut-up Tool by Erik Waters, contact at: ErikJ.Waters@gmail.com</h8>
+  
+  </body>
 </html>
