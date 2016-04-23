@@ -11,45 +11,77 @@
     <link rel="stylesheet" href="cutuptool.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-    <script src="cutuptool.js" defer></script>.
-    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+    <script src="cutuptool.js" defer></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
 
   </head>
+  <body>
   
-    <div class="header">
+    <div id="header">
       <h1>Cut-Up Tool</h1>
-      <span id="version">Alpha v0.1</span>
+      <span id="version">Alpha v0.2</span>
     </div>
-  
-    <div id="options">
-        <span id="mode">Select Mode:</span>
-        <span>Bowie</span>
-        <input type="radio" name="mode" id="bowie"></input>
-        <span>Yorke</span>
-        <input type="radio" name="mode" id="yorke"></input>
-        <span>Random</span>
-        <input type="radio" name="mode" id="random" checked="true"></input>
-      <div>
-        <button type="button" id="cutit">Cut & Shuffle</button>
-        <button type="button" id="cutitagain">Swap Text</button>
-        <button type="botton" id="clear">Clear</button>
+
+    <div class="container">
+      <div class="row content">
+        <div class="col-md-2 col-lg-2 col-xl-2 sidenav"></div>
+
+        <div class="col-md-8 col-lg-8 col-xl-8">
+          <div id="options" data-toggle="buttons">
+            <label class="btn btn-options" id="bowieLabel">
+              <input type="radio" name="mode" id="bowie">
+              Bowie
+            </label>
+            <label class="btn btn-options" id="yorkeLabel">
+              <input type="radio" name="mode" id="yorke">
+              Yorke
+            </label>
+            <label class="btn btn-options btn-options-active" id="randomLabel">
+              <input type="radio" name="mode" id="random" checked="true">
+              Random
+            </label>
+          </div>
+          <div id="actions">
+
+            <button type="button" class="btn btn-actions" id="cutit" data-toggle="tooltip" title="Cut & Shuffle">
+              <span class="glyphicon glyphicon-scissors"></span>
+            </button>
+            <button type="button" class="btn btn-actions" id="cutitagain" data-toggle="tooltip" title="Swap Text">
+              <span class="glyphicon glyphicon-menu-up"></span>
+            </button>
+            <button type="button" class="btn btn-actions" id="clear" data-toggle="tooltip" title="Clear">
+              <span class="glyphicon glyphicon-erase"></span>
+            </button>
+
+          </div>
+          <div id="input">
+            <textarea class="form-control" id="text_input" rows="12" placeholder="Paste text here & click Cut & Shuffle to cut-up&#10&#10Click Swap Text to submit previous output for more shuffling&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random "></textarea>
+          </div>
+          <div id="output">
+            <textarea class="form-control" id="text_output" rows="12" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using Ctrl+a to select the text and then copy / paste into a text editor"></textarea>
+          </div>
+        </div>
+        <div class="col-md-2 col-lg-2 col-xl-2 sidenav">
+        </div>
       </div>
     </div>
   
-    <div id="input">
-      <textarea id="text_input" rows="12" cols="50" placeholder="Paste text here & click Cut & Shuffle to cut-up&#10&#10Click Swap Text to submit previous output for more shuffling&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random "></textarea>
+    <div class="container">
+      <div class="row content">
+        <div class="col-md-3 col-lg-3 col-xl-3"></div>
+        <div class="col-md-6 col-lg-6 col-xl-6" id="status">
+          <h4 class="status">
+            Status:
+          </h4>
+          <h4 class="status" id="status_readout">
+            Ready, mode: random
+          </h4>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3"></div>
+      </div>
     </div>
-  
-    <div id="output">
-      <textarea id="text_output" rows="12" cols="50" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using Ctrl+a to select the text and then copy / paste into a text editor"></textarea>
-    </div>
-  
-    <div id="status">
-      <h4 class="status">Status:</h4>
-      <h4 class="status" id="status_readout">Ready, mode: random</h4>
-    </div>
-  
-    <h8>Auto Cut-up Tool by Erik Waters, contact at: ErikJ.Waters@gmail.com</h8>
-  
+
+  <h8>Auto Cut-up Tool by Erik Waters, contact at: ErikJ.Waters@gmail.com</h8>
+
   </body>
 </html>
