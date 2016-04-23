@@ -18,6 +18,28 @@ $(function(){
         cutit = $('#cutit'),
         cutitagain = $('#cutitagain'),
         clear = $('#clear');
+    // toggles options label classes for css styling
+    function toggleLabel(option) {
+        switch (option) {
+            case "bowie":
+                $('#bowieLabel').addClass("btn-options-active");
+                $('#yorkeLabel').removeClass("btn-options-active");
+                $('#randomLabel').removeClass("btn-options-active");
+                break;
+            case "yorke":
+                $('#bowieLabel').removeClass("btn-options-active");
+                $('#yorkeLabel').addClass("btn-options-active");
+                $('#randomLabel').removeClass("btn-options-active");
+                break;
+            case "random":
+                $('#bowieLabel').removeClass("btn-options-active");
+                $('#yorkeLabel').removeClass("btn-options-active");
+                $('#randomLabel').addClass("btn-options-active");
+                break;
+            default:
+                readout.text("error from function:toggleLabel");
+        }
+    }
     // displays status of shuffle, if check fails pass option
     function checkOk(status) {
         switch (status) {
@@ -37,7 +59,7 @@ $(function(){
                 readout.text("Failed check, please try again with more text");
                 break;
             default:
-                readout.text("Something is wrong");
+                readout.text("error from function:checkOK");
         }
     }
     // this is the whole point of this thing
@@ -55,9 +77,9 @@ $(function(){
         }
         return array;
     }
-    // check to see an appropriate amount of elements exist by option
+    // called below to compare length to target
     function testInput(textArray, targetLength) {
-        console.log("testing", textArray);
+        console.log("testing");
     if (textArray.length > targetLength) {
             console.log("test ok");
             return check = "ok";
@@ -66,6 +88,7 @@ $(function(){
             return check = "fail";
         }
     }
+    // check to see an appropriate amount of elements exist by option
     function checkArray(text, option) {
         var fail, splitText;
         console.log("getting reaady to check", option);
@@ -135,6 +158,7 @@ $(function(){
     options.click(function (e) {
         if (e.target.type === "radio") {
             option = e.target.id;
+            toggleLabel(e.target.id);
             readout.text("Mode changed to: " + option + " - Ready");
         }
     });
@@ -162,9 +186,12 @@ $(function(){
             readout.text("Moved Output to Input Field - Ready");
         }
     });
+    // clear event handler
     clear.click(function (e) {
         text_output.val('');
         text_input.val('');
         readout.text("Text cleared, mode: " + option + " - Ready");
     });
+    // initialize tooltips
+    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });
