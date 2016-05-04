@@ -192,6 +192,4 @@ $(function(){
         text_input.val('');
         readout.text("Text cleared, mode: " + option + " - Ready");
     });
-    // initialize tooltips
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 });
