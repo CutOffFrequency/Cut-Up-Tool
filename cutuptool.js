@@ -140,8 +140,8 @@ $(function(){
             q.push(s);
             t -= m; // decrement by m
         }
-        if (t > 0) { // if there's anything left: stringify and push to q, same process as above
-            r = text.splice(0, m);
+        if (t) { // if there's anything left: stringify and push to q, same process as above
+            r = text.splice(0, t);
             s = r.join(" ");
             q.push(s);
         }
