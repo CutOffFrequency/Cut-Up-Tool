@@ -134,13 +134,13 @@ $(function(){
             q = [],
             t = text.length;
         while (t > 5) { // while there are enough elements in the array to grab up to 6 elements
-            m = Math.floor(Math.random() * (5 - 3 + 1)) + 3; // determine the number of elements to move; 4 - 6
+            m = Math.floor(Math.random() * (6 - 4 + 1)) + 4; // determine the number of elements to move; 4 - 6
             r = text.splice(0, m); // select the appropriate elements, stringify & move to q
             s = r.join(" ");
             q.push(s);
             t -= m; // decrement by m
         }
-        if (t) { // if there's anything left: stringify and push to q, same process as above
+        if (t > 0) { // if there's anything left: stringify and push to q, same process as above
             r = text.splice(0, m);
             s = r.join(" ");
             q.push(s);
