@@ -5,12 +5,20 @@ $(function(){
     var inputText,
         inputDelim,
         check,
+        hook,
         option = "random",
         text_input = $('#text_input'),
         text_output = $('#text_output'),
         bowie = $('#bowie'),
+        bowieL = $('#bowieLabel'),
         yorke = $('#yorke'),
+        yorkeL = $('#yorkeLabel'),
         random = $('#random'),
+        randomL = $('#randomLabel'),
+        compose = $('#compose'),
+        composeL = $('#composeLabel'),
+        chorus = $('#chorus'),
+        verse = $('#verse'),
         input = $('#input'),
         output = $('#output'),
         options = $('#options'),
@@ -18,27 +26,53 @@ $(function(){
         cutit = $('#cutit'),
         cutitagain = $('#cutitagain'),
         clear = $('#clear');
-    // toggles options label classes for css styling
+    // changes options label classes
+    function reclassLabel(reclass) {
+        for (var i = 0; i < reclass.addActive.length; i++) {
+            reclass.addActive[i].addClass("btn-options-active");
+        }
+        for (var i = 0; i < reclass.removeActive.length; i++) {
+            reclass.removeActive[i].removeClass("btn-options-active");
+        }
+        for (var i = 0; i < reclass.addHidden.length; i++) {
+            reclass.addHidden[i].addClass("hidden");
+        }
+        for (var i = 0; i < reclass.removeHidden.length; i++) {
+            reclass.removeHidden[i].removeClass("hidden");
+        }
+    }
+    // toggles reclassLabel function to change options label classes
     function toggleLabel(option) {
-        switch (option) {
+        var reclass = {};
+        switch (option) { // set reclass object properties as arrays of elements to reclass
             case "bowie":
-                $('#bowieLabel').addClass("btn-options-active");
-                $('#yorkeLabel').removeClass("btn-options-active");
-                $('#randomLabel').removeClass("btn-options-active");
+                reclass.addActive = [bowieL];
+                reclass.removeActive = [yorkeL, randomL, composeL];
+                reclass.addHidden = [chorus, verse];
+                reclass.removeHidden = [cutit, cutitagain];
                 break;
             case "yorke":
-                $('#bowieLabel').removeClass("btn-options-active");
-                $('#yorkeLabel').addClass("btn-options-active");
-                $('#randomLabel').removeClass("btn-options-active");
+                reclass.addActive = [yorkeL];
+                reclass.removeActive = [bowieL, randomL, composeL];
+                reclass.addHidden = [chorus, verse];
+                reclass.removeHidden = [cutit, cutitagain];
                 break;
             case "random":
-                $('#bowieLabel').removeClass("btn-options-active");
-                $('#yorkeLabel').removeClass("btn-options-active");
-                $('#randomLabel').addClass("btn-options-active");
+                reclass.addActive = [randomL];
+                reclass.removeActive = [bowieL, yorkeL, composeL];
+                reclass.addHidden = [chorus, verse];
+                reclass.removeHidden = [cutit, cutitagain];
+                break;
+            case "compose":
+                reclass.addActive = [composeL];
+                reclass.removeActive = [bowieL, yorkeL, randomL];
+                reclass.addHidden = [cutit, cutitagain];
+                reclass.removeHidden = [chorus, verse];
                 break;
             default:
                 readout.text("error from function:toggleLabel");
         }
+        reclassLabel(reclass);
     }
     // displays status of shuffle, if check fails pass option
     function checkOk(status) {
@@ -56,6 +90,9 @@ $(function(){
                 readout.text("Failed check, please try again with more text separated by commas");
                 break;
             case "random":
+                readout.text("Failed check, please try again with more text");
+                break;
+            case "compose":
                 readout.text("Failed check, please try again with more text");
                 break;
             default:
@@ -105,9 +142,12 @@ $(function(){
                 splitText = text.split(" ");
                 check = testInput(splitText, 4);
                 break;
-            default:
-                console.log("you broke it");
+            case "compose":
+                splitText = text.split(" ");
+                check = testInput(splitText, 20);
                 break;
+            default:
+                readout.text("Oops, you broke it");
         }
         if (check === "ok") {
             console.log("check ok!");
@@ -156,10 +196,18 @@ $(function(){
     }
     // radio event listener
     options.click(function (e) {
-        if (e.target.type === "radio") {
+        if (e.target.type === "radio" && e.target.name === "mode") {
             option = e.target.id;
             toggleLabel(e.target.id);
-            readout.text("Mode changed to: " + option + " - Ready");
+            if (option === "compose") {
+                readout.text("Mode changed to: " + option + " - New options ready");
+            } else {
+                readout.text("Mode changed to: " + option + " - Ready");
+            }
+        } else {
+            if (e.target.type === "radio" && e.target.name === "composeOption") {
+
+            };
         }
     });
     // shuffle event handler
@@ -175,6 +223,8 @@ $(function(){
             case "random":
                 checkArray(inputText, option);
                 break;
+            default:
+                console.log("cutit invoked");
         }
     });
     // swap event handler
