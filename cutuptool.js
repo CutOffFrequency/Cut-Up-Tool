@@ -5,7 +5,7 @@ $(function(){
     var inputText,
         inputDelim,
         check,
-        hook,
+        composeArray = [],
         option = "random",
         text_input = $('#text_input'),
         text_output = $('#text_output'),
@@ -114,14 +114,14 @@ $(function(){
         }
         return array;
     }
-    // called below to compare length to target
+    // compare length to target
     function testInput(textArray, targetLength) {
         console.log("testing");
     if (textArray.length > targetLength) {
-            console.log("test ok");
+            console.log("testInput ok");
             return check = "ok";
         } else {
-            console.log("test fail");
+            console.log("testInput fail");
             return check = "fail";
         }
     }
@@ -134,8 +134,8 @@ $(function(){
                 splitText = text.split(" ");
                 check = testInput(splitText, 12);
                 break;
-            case "yorke":
-                splitText = text.split(", "); // ", " to prevent insertion of extra spaces when ranomize is invoked
+            case "yorke": // preventing insertion of extra spaces when ranomize is invoked
+                splitText = text.split(", "); 
                 check = testInput(splitText, 3);
                 break;
             case "random":
@@ -174,7 +174,7 @@ $(function(){
             q = [],
             t = text.length;
         while (t > 5) { // while there are enough elements in the array to grab up to 6 elements
-            m = Math.floor(Math.random() * (6 - 4 + 1)) + 4; // determine the number of elements to move; 4 - 6
+            m = Math.floor(Math.random() * (6 - 4 + 1)) + 4; // the number of elements to move; 4 - 6
             r = text.splice(0, m); // select the appropriate elements, stringify & move to q
             s = r.join(" ");
             q.push(s);
@@ -187,6 +187,32 @@ $(function(){
         }
         randomize(q);
     }
+    function addVerse(text){
+        var a,
+            b,
+            l,
+            v = [],
+            m,
+            n,
+            o,
+            p,
+            q = text.length;
+        m = Math.floor(Math.random() * (20 - 12 + 1)) + 12; //  the number of elements to grab; 12 - 20
+        n = Math.floor(Math.random() * (4 - 8 + 1)) + 8; //  the number of lines for the verse; 4 - 8
+        o = q - m; //  the range for the the position to grab from
+        for (var i = 0; i < n; i++) { // grab the number of lines equal to n
+            p = Math.floor(Math.random() * (1 - o + 1)) + o; //  the position to grab from
+            l = text.splice(p, m);
+            v[i] = l.join(" ");
+            console.log("verse ",v);
+        }
+        b = v.join("\n");
+        text_output.val(text_output.val() + "\n" + b);
+    }
+    function swap() { 
+        text_input.val(text_output.val()); // move output text to input field
+        text_output.val(''); // clear output field
+    }
     // invoke sort for bowie else randomize
     function cutup(text, option) {
         // console.log("cut up", option)
@@ -197,6 +223,7 @@ $(function(){
     // radio event listener
     options.click(function (e) {
         if (e.target.type === "radio" && e.target.name === "mode") {
+            // swap when changing mode to compose
             option = e.target.id;
             toggleLabel(e.target.id);
             if (option === "compose") {
@@ -205,7 +232,17 @@ $(function(){
                 readout.text("Mode changed to: " + option + " - Ready");
             }
         } else {
-            if (e.target.type === "radio" && e.target.name === "composeOption") {
+            if ($(e.target).hasClass("compose-option")) {
+                switch (e.target.id) {
+                    case "verse":
+                        addVerse(text_input.val().split(" "));
+                        break;
+                    case "chorus":
+                        // todo
+                        break;
+                    default:
+                        console.log("error from compose_option case");
+                }
 
             };
         }
@@ -224,15 +261,14 @@ $(function(){
                 checkArray(inputText, option);
                 break;
             default:
-                console.log("cutit invoked");
+                console.log("error from cutit case");
         }
     });
     // swap event handler
     cutitagain.click(function (e) {
-        var blip, outValue = text_output.val();
-        if (outValue) {
-            text_input.val(outValue);
-            text_output.val('');
+        var blip;
+        if (text_output.val()) {
+            swap();
             readout.text("Moved Output to Input Field - Ready");
         }
     });
