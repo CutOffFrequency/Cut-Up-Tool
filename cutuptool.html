@@ -44,15 +44,15 @@
               <input type="radio" name="mode" id="compose">
               Compose
             </label>
-            <label class="btn btn-options hidden" id="verse" name="composeOption">
+            <label class="btn btn-options hidden compose-option" id="verse">
               Verse
             </label>
-            <label class="btn btn-options hidden" id="chorus" name="composeOption">
+            <label class="btn btn-options hidden compose-option" id="chorus">
               Chorus
             </label>
           </div>
-          <div id="actions">
 
+          <div id="actions">
             <button type="button" class="btn btn-actions" id="cutit" data-toggle="tooltip" title="Cut & Shuffle">
               <span class="glyphicon glyphicon-scissors"></span>
             </button>
@@ -62,11 +62,12 @@
             <button type="button" class="btn btn-actions" id="clear" data-toggle="tooltip" title="Clear">
               <span class="glyphicon glyphicon-erase"></span>
             </button>
-
           </div>
+
           <div id="input">
             <textarea class="form-control" id="text_input" rows="12" placeholder="Paste text here & click Cut & Shuffle to cut-up&#10&#10Click Swap Text to submit previous output for more shuffling&#10&#10Bowie Mode cuts text up into groupings of 4 - 6 words &#10&#10Yorke Mode re-sorts lines separated by a comma &#10&#10Random Mode is, well... more random&#10&#10Compose Mode gives the option to add a random verse or chorus to the field below"></textarea>
           </div>
+
           <div id="output">
             <textarea class="form-control" id="text_output" rows="12" placeholder="Cut-up text shows up here &#10&#10If the text runs beyond the box area you can drag the bottom right corner to make it larger&#10&#10I recommend using Ctrl+a to select the text and then copy / paste into a text editor"></textarea>
           </div>
