@@ -26,6 +26,10 @@ $(function(){
         cutit = $('#cutit'),
         cutitagain = $('#cutitagain'),
         clear = $('#clear');
+    // random number between two integers
+    function randomMinMax(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     // changes options label classes
     function reclassLabel(reclass) {
         for (var i = 0; i < reclass.addActive.length; i++) {
@@ -70,7 +74,7 @@ $(function(){
                 reclass.removeHidden = [chorus, verse];
                 break;
             default:
-                readout.text("error from function:toggleLabel");
+                readout.text("error from toggleLabel case");
         }
         reclassLabel(reclass);
     }
@@ -96,7 +100,7 @@ $(function(){
                 readout.text("Failed check, please try again with more text");
                 break;
             default:
-                readout.text("error from function:checkOK");
+                readout.text("error from checkOK case");
         }
     }
     // this is the whole point of this thing
@@ -134,7 +138,7 @@ $(function(){
                 splitText = text.split(" ");
                 check = testInput(splitText, 12);
                 break;
-            case "yorke": // preventing insertion of extra spaces when ranomize is invoked
+            case "yorke": // preventing insertion of extra spaces when randomize is invoked
                 splitText = text.split(", "); 
                 check = testInput(splitText, 3);
                 break;
@@ -147,7 +151,7 @@ $(function(){
                 check = testInput(splitText, 20);
                 break;
             default:
-                readout.text("Oops, you broke it");
+                readout.text("error from checkArray case");
         }
         if (check === "ok") {
             console.log("check ok!");
@@ -174,7 +178,7 @@ $(function(){
             q = [],
             t = text.length;
         while (t > 5) { // while there are enough elements in the array to grab up to 6 elements
-            m = Math.floor(Math.random() * (6 - 4 + 1)) + 4; // the number of elements to move; 4 - 6
+            m = randomMinMax(4, 6); // the number of elements to move; 4 - 6
             r = text.splice(0, m); // select the appropriate elements, stringify & move to q
             s = r.join(" ");
             q.push(s);
@@ -197,18 +201,24 @@ $(function(){
             o,
             p,
             q = text.length;
-        m = Math.floor(Math.random() * (20 - 12 + 1)) + 12; //  the number of elements to grab; 12 - 20
-        n = Math.floor(Math.random() * (4 - 8 + 1)) + 8; //  the number of lines for the verse; 4 - 8
+        m = randomMinMax(8, 12); //  the number of elements to grab; 12 - 20
+        n = randomMinMax(4, 8); //  the number of lines for the verse; 4 - 8
         o = q - m; //  the range for the the position to grab from
         for (var i = 0; i < n; i++) { // grab the number of lines equal to n
-            p = Math.floor(Math.random() * (1 - o + 1)) + o; //  the position to grab from
+            console.log("o: ", o);
+            p = randomMinMax(1, o); //  the position to grab from
+            console.log("p ", p);
             l = text.splice(p, m);
+            console.log("l: ",l," text by p: ",text[p]," snippet from text at p: ", text.splice(p, m));
             v[i] = l.join(" ");
-            console.log("verse ",v);
         }
         b = v.join("\n");
         text_output.val(text_output.val() + "\n" + b);
     }
+    function addChorus(text){
+        console.log("verse");
+    }
+    // move output text to input field, clear output
     function swap() { 
         text_input.val(text_output.val()); // move output text to input field
         text_output.val(''); // clear output field
@@ -223,7 +233,6 @@ $(function(){
     // radio event listener
     options.click(function (e) {
         if (e.target.type === "radio" && e.target.name === "mode") {
-            // swap when changing mode to compose
             option = e.target.id;
             toggleLabel(e.target.id);
             if (option === "compose") {
@@ -238,7 +247,7 @@ $(function(){
                         addVerse(text_input.val().split(" "));
                         break;
                     case "chorus":
-                        // todo
+                        addChorus(text_input.val().split(" "));
                         break;
                     default:
                         console.log("error from compose_option case");
