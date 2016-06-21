@@ -24,7 +24,7 @@
             clear = $('#clear');
         Vue.component('btn-act', {
             props: ['msg'],
-            template: '<button type="button" >{{msg}}</button>'
+            template: '<button type="button" class="btn btn-action">{{msg}}</button>'
         })
         new Vue ({ // view model
             el: '#app',
@@ -37,8 +37,12 @@
                     output.val('')
                 },
                 clear: function (e) {
-                  input.val('');
-                  output.val('');
+                  input.val('')
+                  output.val('')
+                },
+                identity: function (e) {
+                  console.log(e.target.className)
+                  console.log(e.target.id)
                 }
             }
         })
