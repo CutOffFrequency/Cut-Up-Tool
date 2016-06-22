@@ -2,31 +2,59 @@
 <html>
   <head>
    <title></title>
-   <link type="text/css" rel="stylesheet" href="buttons.css" />
+   <link type="text/css" rel="stylesheet" href="cut.css" />
   </head>
   <body>
     <div id = "app">
-      <h1 v-cloak>{{header}}</h1>
+      <h1>Cut Up Tool</h1>
+      <btn-mode msg="Bowie" id="bowie" @click="test"></btn-mode>
+      <btn-mode msg="Yorke" id="yorke" @click="test"></btn-mode>
+      <btn-mode msg="Random" id="random" @click="test"></btn-mode>
       <btn-act msg='Swap' id='swap' @click="swap"></btn-act>
-      <btn-act msg='Clear' id='clear' @click="clear"></btn-act>
+      <btn-act msg='Clear' id='clear' @click="clear" active="true"></btn-act>
       <form>
-        <textarea id='input'></textarea>
-        <textarea id='output'></textarea>
+        <textarea id='input' @click="identity" rows="12"></textarea>
+        <textarea id='output' @click="identity" rows="12"></textarea>
       </form>
     </div>
     <script src="https://cdn.jsdelivr.net/vue/1.0.25/vue.min.js"></script>
     <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A=="crossorigin="anonymous"></script>
     <script>
-        var input = $('#input'),
+        function randomMinMax(min, max) { // pick random integer min - max
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function shuffle(array) { // fisher yates shuffle
+            var m = array.length, 
+                t, 
+                i; 
+            while (m) { // while there are elements to shuffle
+                i = Math.floor(Math.random() * m--); // pick an element
+                t = array[m]; // and swap
+                array[m] = array[i];
+                array[i] = t;
+            }
+            return array;
+        }
+        function testInput(array, target) { // compare array to target length
+            return array.length > target ? true : false
+        }
+        var bowie = $('#bowie'),
+            yorke = $('#yorke'),
+            random = $('#random'),
+            input = $('#input'),
             output = $('#output'),
             swap = $('#swap'),
             clear = $('#clear');
+        Vue.component('btn-mode', {
+            props: ['msg'],
+            template: '<button type="button" class="btn btn-mode">{{msg}}</button>'
+        })
         Vue.component('btn-act', {
             props: ['msg'],
             template: '<button type="button" class="btn btn-action">{{msg}}</button>'
         })
-        new Vue ({ // view model
+        new Vue ({
             el: '#app',
             data: {
                 header: 'document'
@@ -37,12 +65,36 @@
                     output.val('')
                 },
                 clear: function (e) {
-                  input.val('')
-                  output.val('')
+                    input.val('')
+                    output.val('')
                 },
-                identity: function (e) {
-                  console.log(e.target.className)
-                  console.log(e.target.id)
+                valCheck: function(mode) {
+                    var check = {};
+                    check.mode = mode
+                    switch (mode) {
+                        case "bowie":
+                            check.array = input.val().split(" ")
+                            check.pass = testInput(check.array, 12)
+                            break;
+                        case "yorke":
+                            check.array = input.val().split(", ")
+                            check.pass = testInput(check.array, 3)
+                            break;
+                        case "random":
+                            check.array = input.val().split(" ")
+                            check.pass = testInput(check.array, 4)
+                            break;
+                        default:
+                            console.log("valcheck error")
+                    }
+                    return check
+                },
+                cut: function(check) {
+                    console.log(check.mode, check.array)
+                },
+                test: function(e) {
+                    testObject = this.valCheck(e.target.id)
+                    testObject.pass === true ? this.cut(testObject) : console.log("test fail")
                 }
             }
         })
